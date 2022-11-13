@@ -49,12 +49,12 @@ social_media:
 topics:
   - name: Mathematics in Finance
     web_url: https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/css/css.png
+    image_url: https://github.com/Shubham-Sahoo/shubham-sahoo.github.io/blob/master/images/mathematics_in_finance.png
 
   - name: Ethereum (Solidity)
     web_url: https://cryptozombies.io/
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/css/css.png
+    image_url: https://github.com/Shubham-Sahoo/shubham-sahoo.github.io/blob/master/images/ethereum.png
 
-  - name: Robotics
-    web_url: https://github.com/topics/sass
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/sass/sass.png
+  - name: Autonomous Ground Vehicles
+    web_url: http://www.agv.iitkgp.ac.in/
+    image_url: https://github.com/Shubham-Sahoo/shubham-sahoo.github.io/blob/master/images/robotics.png
