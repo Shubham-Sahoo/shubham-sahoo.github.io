@@ -4,8 +4,17 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Octokit } from "@octokit/rest";
 
+interface Repo {
+  id: number;
+  name: string;
+  description: string | null;
+  pushed_at: string;
+  stargazers_count: number;
+  html_url: string;
+}
+
 export default function Home() {
-  const [repos, setRepos] = useState([]);
+  const [repos, setRepos] = useState<Repo[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [reposPerPage] = useState(9); // Number of repos to show per page
@@ -48,7 +57,7 @@ export default function Home() {
         // Remove duplicates based on the repository name and prefer the one with more stars
         const repoMap = new Map();
         allRepos.forEach((repo) => {
-          if (!repoMap.has(repo.name) || repoMap.get(repo.name).stargazers_count < repo.stargazers_count) {
+          if (!repoMap.has(repo.name) || repoMap.get(repo.name).stargazers_count < (repo.stargazers_count??0)) {
             repoMap.set(repo.name, repo);
           }
         });
@@ -57,7 +66,7 @@ export default function Home() {
         const uniqueRepos = Array.from(repoMap.values());
 
         // Sort repositories by the latest pushed date
-        const sortedRepos = uniqueRepos.sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+        const sortedRepos = uniqueRepos.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime());
 
         setRepos(sortedRepos);
       } catch (error) {
@@ -78,7 +87,7 @@ export default function Home() {
   const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
   const currentRepos = filteredRepos.slice(indexOfFirstRepo, indexOfLastRepo);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const totalPages = Math.ceil(filteredRepos.length / reposPerPage);
 

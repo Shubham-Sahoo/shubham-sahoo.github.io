@@ -2,14 +2,18 @@
   "name": "shubham-sahoo.github.io",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://shubham-sahoo.github.io",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.1",
+    "gh-pages": "^6.3.0",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
