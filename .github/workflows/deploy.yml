@@ -23,9 +23,7 @@ jobs:
         run: npm ci  # Clean install dependencies
 
       - name: Build and Export Next.js site
-        run: |
-          npm run build  # Build the Next.js project
-          npm run export  # Export the project as static HTML files
+        run: npm run build  # Build the Next.js project
 
       - name: List files in 'out' directory
         run: ls -la out  # This is to debug if the export was successful and files are present in the 'out' directory
