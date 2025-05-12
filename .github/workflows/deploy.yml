@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Set Git configuration
+      - name: Set up Git configuration
+        run: |
+          git config --global user.email "shubhamsomnath@gmail.com"
+          git config --global user.name "shubham-sahoo"
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -36,7 +42,7 @@ jobs:
           
           # Remove all old files except the out/ directory
           shopt -s extglob
-          
+
           rm -rf !(out)
           
           # Copy the new build into the root of gh-pages
