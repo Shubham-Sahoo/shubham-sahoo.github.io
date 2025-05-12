@@ -6,7 +6,7 @@ let assetPrefix = '';
 let basePath = '';
 
 if (isGithubActions) {
-  const repo = 'shubham-sahoo.github.io';
+  const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'shubham-sahoo.github.io';
   assetPrefix = `/${repo}/`;
   basePath = `/${repo}`;
 }
