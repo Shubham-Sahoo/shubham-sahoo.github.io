@@ -58,3 +58,6 @@ dist/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# Build files
+/out/*
