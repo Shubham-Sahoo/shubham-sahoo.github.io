@@ -4,6 +4,25 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Octokit } from "@octokit/rest";
 
+// Define types for GitHub event data
+interface RepoEvent {
+  type: string | null; // Ensure this is always a string
+  repo: {
+    name: string;
+  };
+}
+
+interface ApiResponse {
+  id: number;
+  name: string;
+  description?: string | null;
+  pushed_at?: string | null; // Mark as optional
+  stargazers_count?: number | null; // Mark as optional
+  html_url: string;
+  owner: {
+    login: string;
+  };
+}
 interface Repo {
   id: number;
   name: string;
@@ -12,6 +31,49 @@ interface Repo {
   stargazers_count: number;
   html_url: string;
 }
+
+interface Repository {
+  id: number;
+  name: string;
+  description: string | null;
+  pushed_at: string | null | undefined; // Ensure this is always a string
+  stargazers_count: number;
+  html_url: string;
+  owner: {
+    login: string;
+  };
+}
+
+const transformToRepository = (repo: ApiResponse): Repository => {
+  return {
+    id: repo.id,
+    name: repo.name,
+    description: repo.description ?? null,
+    pushed_at: repo.pushed_at ?? new Date().toISOString(), // Default to current timestamp if undefined
+    stargazers_count: repo.stargazers_count ?? 0, // Default to 0 if undefined
+    html_url: repo.html_url,
+    owner: {
+      login: repo.owner.login,
+    },
+  };
+};
+
+const isApiResponse = (repo: unknown): repo is ApiResponse => {
+  if (typeof repo !== 'object' || repo === null) {
+    return false;
+  }
+
+  const r = repo as Partial<ApiResponse>;
+  return (
+    typeof r.id === 'number' &&
+    typeof r.name === 'string' &&
+    (r.description === undefined || r.description === null || typeof r.description === 'string') &&
+    (r.pushed_at === undefined || r.pushed_at === null || typeof r.pushed_at === 'string') &&
+    (r.stargazers_count === undefined || r.stargazers_count === null || typeof r.stargazers_count === 'number') &&
+    typeof r.html_url === 'string' &&
+    typeof r.owner?.login === 'string'
+  );
+};
 
 export default function Home() {
   const [repos, setRepos] = useState<Repo[]>([]);
@@ -22,42 +84,92 @@ export default function Home() {
   useEffect(() => {
     const octokit = new Octokit();
 
-    async function fetchRepos() {
-      try {
-        // Fetch your repositories
-        const userRepos = await octokit.rest.repos.listForUser({
-          username: 'Shubham-Sahoo',
+    async function fetchAllContributions(username: string): Promise<RepoEvent[]> {
+      const perPage = 100; // Maximum number of events per page
+      let page = 1;
+      let morePages = true;
+      const allEvents: RepoEvent[] = [];
+
+      // Fetch all public events for the user with pagination
+      while (morePages) {
+        const response = await octokit.rest.activity.listPublicEventsForUser({
+          username,
+          per_page: perPage,
+          page,
         });
 
-        // Fetch public events (push and PR events)
-        const contributedReposData = await octokit.rest.activity.listPublicEventsForUser({
+        allEvents.push(...response.data);
+
+        // Stop if the number of returned events is less than the perPage limit
+        if (response.data.length < perPage) {
+          morePages = false;
+        } else {
+          page++;
+        }
+      }
+
+      return allEvents;
+    }
+
+    async function fetchRepos() {
+      try {
+        // Fetch repositories owned by the user
+        const userRepos = await octokit.rest.repos.listForUser({
           username: 'Shubham-Sahoo',
+          per_page: 100,
         });
+
+        // const transformedRepos = userRepos.data.map((repo: ApiResponse) => transformToRepository(repo));
+        // setRepos(transformedRepos);
+
+        const transformedRepos = userRepos.data
+        .filter(isApiResponse)
+        .map((repo) => transformToRepository(repo));
+
+        // Fetch all public events to get contribution repositories
+        const allEvents = await fetchAllContributions('Shubham-Sahoo');
 
         // Filter events for push and pull request contributions
         const contribReposDetails = await Promise.all(
-          contributedReposData.data
+          allEvents
             .filter((event) => {
-              const isPushEvent = event.type === 'PushEvent';
-              const isPullRequestEvent = event.type === 'PullRequestEvent';
-              return isPushEvent || isPullRequestEvent;
+              const validTypes = ['PushEvent', 'PullRequestEvent', 'PullRequestReviewCommentEvent'];
+              return event.repo?.name && validTypes.includes(event.type || ''); // Ensure event.repo exists and type is valid
             })
             .map(async (event) => {
-              const repoDetails = await octokit.rest.repos.get({
-                owner: event.repo.name.split('/')[0],
-                repo: event.repo.name.split('/')[1],
-              });
-              return repoDetails.data;
+              try {
+                if (!event.repo || !event.repo.name) return null; // Skip if repo or repo.name is null or undefined
+                const repoName = event.repo.name || ""; // Fallback to an empty string if repo.name is null or undefined
+                const [owner, repo] = repoName.split("/");
+
+                if (!owner || !repo) return null; // Skip if the repo name is malformed
+                const repoDetails = await octokit.rest.repos.get({
+                  owner,
+                  repo,
+                });
+                return repoDetails.data;
+              } catch (error) {
+                if (error instanceof Error) {
+                  console.error(`Failed to fetch details for ${event.repo?.name || 'unknown repo'}:`, error.message);
+                } else {
+                  console.error('Unknown error occurred while fetching repo details.');
+                }
+                return null; // Skip on error
+              }
             })
         );
 
-        // Combine your repos with the contributed repos
-        const allRepos = [...userRepos.data, ...contribReposDetails];
+        const validContribRepos = contribReposDetails.filter(Boolean) as Repository[]; // Type assertion here to specify it's an array of Repository objects
+        console.log("Contributed Repositories: ", validContribRepos);
+
+        // Combine user's repos with contributed repos
+        const allRepos = [...transformedRepos, ...validContribRepos];
 
         // Remove duplicates based on the repository name and prefer the one with more stars
         const repoMap = new Map();
-        allRepos.forEach((repo) => {
-          if (!repoMap.has(repo.name) || repoMap.get(repo.name).stargazers_count < (repo.stargazers_count??0)) {
+        allRepos.forEach((repo: Repository) => {
+          const stargazersCount = repo.stargazers_count ?? 0; // Use 0 if undefined
+          if (!repoMap.has(repo.name) || repoMap.get(repo.name).stargazers_count < stargazersCount) {
             repoMap.set(repo.name, repo);
           }
         });
@@ -66,7 +178,9 @@ export default function Home() {
         const uniqueRepos = Array.from(repoMap.values());
 
         // Sort repositories by the latest pushed date
-        const sortedRepos = uniqueRepos.sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime());
+        const sortedRepos = uniqueRepos.sort(
+          (a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
+        );
 
         setRepos(sortedRepos);
       } catch (error) {
