@@ -28,11 +28,22 @@ jobs:
       - name: List files in 'out' directory
         run: ls -la out  # This is to debug if the export was successful and files are present in the 'out' directory
 
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out  # Directory containing the static files to deploy
+        run: |
+          git fetch --all
+          git checkout gh-pages
+          
+          # Remove all old files except the out/ directory
+          rm -rf !(out)
+          
+          # Copy the new build into the root of gh-pages
+          cp -r out/* .
+
+          # Add, commit, and push changes
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push origin gh-pages
 
       - name: Clean up
         run: git checkout main  # Switch back to the main branch after deployment
