@@ -7,7 +7,7 @@ let basePath = '';
 
 if (isGithubActions) {
   const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'shubham-sahoo.github.io';
-  assetPrefix = `/${repo}`;
+  assetPrefix = `/${repo}/`;
   basePath = `/${repo}`;
 }
 
@@ -18,4 +18,5 @@ const nextConfig: NextConfig = {
   trailingSlash: true, // Ensure paths have trailing slashes
 };
 
-export default nextConfig;
+// export default nextConfig;
+module.exports = nextConfig;
