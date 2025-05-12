@@ -35,6 +35,8 @@ jobs:
           git checkout gh-pages
           
           # Remove all old files except the out/ directory
+          shopt -s extglob
+          
           rm -rf !(out)
           
           # Copy the new build into the root of gh-pages
