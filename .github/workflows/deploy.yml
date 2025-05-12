@@ -16,17 +16,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # Update Node.js version to 20 or compatible with Next.js
+          node-version: '20'  # Use Node.js version 20 (or compatible with Next.js)
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci  # Clean install dependencies
 
-      - name: Build project
-        run: npm run build
+      - name: Build and Export Next.js site
+        run: |
+          npm run build  # Build the Next.js project
+          npm run export  # Export the project as static HTML files
+
+      - name: List files in 'out' directory
+        run: ls -la out  # This is to debug if the export was successful and files are present in the 'out' directory
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          publish_dir: ./out  # Directory containing the static files to deploy
+
+      - name: Clean up
+        run: git checkout main  # Switch back to the main branch after deployment
