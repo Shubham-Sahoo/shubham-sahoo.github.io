@@ -24,7 +24,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Ph.D. Candidate in [Your Field] at [Your University]
+            Dual Degree in Electronics and Electrical Communication Engineering, IIT Kharagpur
           </motion.p>
           <motion.p
             className="text-[var(--font-size-lg)] text-[var(--color-text)] mb-12"

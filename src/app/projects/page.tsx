@@ -178,14 +178,27 @@ export default function Projects() {
     return matchesCategory && matchesStatus;
   });
 
-  const getStatusColor = (status) => {
+  type Status =
+  | "Active"
+  | "Completed"
+  | "Collaboration"
+  | "Production"
+  | "Under Review";
+
+  const getStatusColor = (status: Status | string): string => {
     switch (status) {
-      case "Active": return "bg-green-100 text-green-800";
-      case "Completed": return "bg-blue-100 text-blue-800";
-      case "Collaboration": return "bg-purple-100 text-purple-800";
-      case "Production": return "bg-orange-100 text-orange-800";
-      case "Under Review": return "bg-yellow-100 text-yellow-800";
-      default: return "bg-gray-100 text-gray-800";
+      case "Active":
+        return "bg-green-100 text-green-800";
+      case "Completed":
+        return "bg-blue-100 text-blue-800";
+      case "Collaboration":
+        return "bg-purple-100 text-purple-800";
+      case "Production":
+        return "bg-orange-100 text-orange-800";
+      case "Under Review":
+        return "bg-yellow-100 text-yellow-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -285,7 +298,7 @@ export default function Projects() {
           </div>
         </div>
       </section>
-      
+
       {/* Filters */}
       <section className="py-8 bg-gray-50 border-b border-gray-200">
         <div className="container">
@@ -515,8 +528,8 @@ export default function Projects() {
             Interested in Collaborating?
           </h2>
           <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-            I'm always excited to work on innovative projects that push the boundaries 
-            of AI and create real-world impact. Let's build something amazing together.
+            I&apos;m always excited to work on innovative projects that push the boundaries 
+            of AI and create real-world impact. Let&apos;s build something amazing together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

@@ -26,7 +26,7 @@ export default function About() {
               I am an experienced Deep Learning Research Engineer with a diverse background 
               spanning embedded systems, wireless communications, and artificial intelligence. 
               Currently working at <strong>NeuroPixel.AI</strong>, I focus on developing 
-              innovative solutions that push the boundaries of what's possible with neural networks.
+              innovative solutions that push the boundaries of what&apos;s possible with neural networks.
             </p>
 
             <p className="text-lg leading-relaxed text-text-primary mb-6">
@@ -37,7 +37,7 @@ export default function About() {
             </p>
 
             <p className="text-lg leading-relaxed text-text-primary">
-              I believe in research that makes a tangible impact. Whether it's optimizing 
+              I believe in research that makes a tangible impact. Whether it&apos;s optimizing 
               neural networks for edge deployment, advancing computer vision capabilities, 
               or exploring new paradigms in machine learning, my work is driven by the 
               desire to solve real problems and create technologies that benefit society.
@@ -275,8 +275,8 @@ export default function About() {
           
           <div className="prose prose-lg max-w-none text-center">
             <blockquote className="text-xl italic border-l-4 border-accent pl-6 my-8">
-              "The best research doesn't just advance our understanding—it creates 
-              tangible value that improves people's lives and solves real problems."
+              &quot;The best research doesn&apos;t just advance our understanding—it creates 
+              tangible value that improves people&apos;s lives and solves real problems.&quot;
             </blockquote>
             
             <p className="text-lg leading-relaxed">
@@ -287,7 +287,7 @@ export default function About() {
             </p>
             
             <p className="text-lg leading-relaxed">
-              I'm particularly passionate about making AI more efficient and accessible. 
+              I&apos;m particularly passionate about making AI more efficient and accessible. 
               This means developing algorithms that can run on resource-constrained devices, 
               creating tools that democratize AI development, and ensuring that the benefits 
               of artificial intelligence reach everyone.
@@ -300,10 +300,10 @@ export default function About() {
       <section className="section-sm bg-primary text-white">
         <div className="container text-center">
           <h2 className="text-3xl font-serif font-semibold mb-6">
-            Let's Collaborate
+            Let&apos;s Collaborate
           </h2>
           <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">
-            I'm always interested in discussing new research opportunities, 
+            I&apos;m always interested in discussing new research opportunities, 
             collaborative projects, and innovative applications of AI technology.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

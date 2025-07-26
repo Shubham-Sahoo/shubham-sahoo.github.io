@@ -79,8 +79,15 @@ export default function Publications() {
   const totalCitations = publications.reduce((sum, pub) => sum + pub.citations, 0);
   const hIndex = calculateHIndex(publications);
 
-  function calculateHIndex(pubs) {
-    const sortedCitations = pubs.map(p => p.citations).sort((a, b) => b - a);
+  interface Publication {
+    citations: number;
+  }
+
+  function calculateHIndex(pubs: Publication[]): number {
+    const sortedCitations = pubs
+      .map((p) => p.citations)
+      .sort((a, b) => b - a);
+
     let h = 0;
     for (let i = 0; i < sortedCitations.length; i++) {
       if (sortedCitations[i] >= i + 1) {

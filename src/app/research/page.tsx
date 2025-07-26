@@ -255,7 +255,7 @@ export default function Research() {
                 </p>
               </div>
               
-              {researchAreas.map((area, index) => (
+              {researchAreas.map((area) => (
                 <div key={area.id} className="card">
                   <div className="flex items-start justify-between mb-6">
                     <h3 className="text-2xl font-serif font-semibold text-primary">
@@ -395,7 +395,7 @@ export default function Research() {
                   Interested in Collaboration?
                 </h3>
                 <p className="mb-6 opacity-90">
-                  I'm always open to discussing new research opportunities and partnerships.
+                  I&apos;m always open to discussing new research opportunities and partnerships.
                 </p>
                 <a 
                   href="/contact" 
