@@ -13,6 +13,9 @@ if (isGithubActions) {
 
 const nextConfig: NextConfig = {
   output: "export",
+  images: {
+    unoptimized: true,
+  },
   assetPrefix: assetPrefix, // Ensure it starts with a leading slash
   basePath: basePath, // Base path for GitHub Pages
   trailingSlash: true, // Ensure paths have trailing slashes
