@@ -1,34 +1,25 @@
 export default function Contact() {
-    return (
-      <section className="py-12">
-        <h1 className="text-3xl font-semibold">Contact Me</h1>
-        <p className="text-gray-300 mt-4">
-          Feel free to reach out to discuss projects, collaborations, or any
-          opportunities.
-        </p>
-        <form className="mt-8">
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="block w-full max-w-md p-2 border border-gray-500 rounded-md mb-4"
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="block w-full max-w-md p-2 border border-gray-500 rounded-md mb-4"
-          />
-          <textarea
-            placeholder="Your Message"
-            className="block w-full max-w-md p-2 border border-gray-500 rounded-md mb-4"
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md"
-          >
-            Send Message
-          </button>
-        </form>
-      </section>
-    );
-  }
-  
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-12 px-6">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-white mb-8 text-center">Contact Me</h1>
+        <div className="bg-gray-800 bg-opacity-50 rounded-lg p-8 text-white text-center">
+          <p className="text-lg mb-8">
+            Feel free to reach out to discuss projects, collaborations, or any opportunities.
+          </p>
+          <div className="space-y-4">
+            <p className="text-xl">You can reach me at:</p>
+            <div className="bg-gray-700 bg-opacity-50 rounded-lg p-4 inline-block">
+              <a
+                href="mailto:shubhamsomnath@gmail.com"
+                className="text-blue-400 hover:text-blue-300 text-lg font-semibold transition-colors"
+              >
+                shubhamsomnath@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
