@@ -3,7 +3,7 @@ export default function About() {
     <div className="min-h-screen bg-background ">
       
       {/* Header Section */}
-      <section className="section bg-white">
+      <section className="section-sm bg-white">
         <div className="container-narrow ">
           <div className="text-center mb-16">
             <h1 className="text-4xl lg:text-5xl font-serif font-bold text-primary mb-6">
@@ -49,7 +49,7 @@ export default function About() {
       </section>
 
       {/* Detailed Career Timeline */}
-      <section className="section bg-white">
+      <section className="section-sm bg-white">
         <div className="container-narrow">
           <h2 className="text-3xl font-serif font-semibold text-center mb-16">
             Professional Journey
@@ -61,7 +61,7 @@ export default function About() {
             <div className="timeline-item">
               <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                 <div className="lg:w-48 flex-shrink-0">
-                  <div className="bg-primary text-white px-4 py-2 rounded-lg text-center">
+                  <div className="bg-accent text-white px-4 py-2 rounded-lg text-center">
                     <div className="font-semibold">2024 - Present</div>
                     <div className="text-sm opacity-90">Current</div>
                   </div>
