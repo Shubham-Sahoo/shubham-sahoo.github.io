@@ -22,6 +22,7 @@ export default function Projects() {
       impact: {
         metric: "Quality Gain",
         value: "Better texture",
+        additional: "",
       },
       links: {
       },
@@ -44,8 +45,10 @@ export default function Projects() {
       impact: {
         metric: "Processing Speed",
         value: "0.5 FPS average",
+        additional: "",
       },
       links: {
+        demo: "",
       },
       image: "/placeholder-project-3.jpg",
       collaborators: ["NeuroPixel.AI"]
@@ -67,11 +70,14 @@ export default function Projects() {
       impact: {
         metric: "Detection Accuracy",
         value: "95% precision",
+        additional: "",
       },
       links: {
         github: "https://github.com/Shubham-Sahoo/ObjectDetection?tab=readme-ov-file",
         paper: "https://siddancha.github.io/projects/active-perception-light-curtains/",
-        video: "https://www.youtube.com/watch?v=WSb5T3HFE7w"
+        video: "https://www.youtube.com/watch?v=WSb5T3HFE7w",
+        demo: "",
+        docs:"",
       },
       image: "https://github.com/Shubham-Sahoo/ObjectDetection/blob/master/images/thumbnail.gif",
       collaborators: ["CMU RPAD Labs", "Siddharth Ancha", "Prof. David Held"]
@@ -92,8 +98,10 @@ export default function Projects() {
       impact: {
         metric: "Inference Speed",
         value: "75% faster",
+        additional: "",
       },
       links: {
+        demo: "",
       },
       image: "/placeholder-project-5.jpg",
       collaborators: ["NeuroPixel.AI", "DevOps Team"]
@@ -115,9 +123,11 @@ export default function Projects() {
       impact: {
         metric: "Navigation Accuracy",
         value: "Published in ICCRT 2019",
+        additional: "",
       },
       links: {
         paper: "https://dl.acm.org/doi/abs/10.1145/3387304.3387321",
+        demo: "",
       },
       image: "/placeholder-project-4.jpg",
       collaborators: ["Autonomous Ground Vehicle Research Group, IIT Kharagpur"]
@@ -492,12 +502,6 @@ export default function Projects() {
               className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Start a Project
-            </a>
-            <a 
-              href="/research" 
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors"
-            >
-              Explore Research
             </a>
           </div>
         </div>
