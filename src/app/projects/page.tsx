@@ -210,35 +210,35 @@ export default function Projects() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">Neural Compression Toolkit</h3>
+              <h3 className="text-lg font-semibold mb-4">Kornia</h3>
               <p className="text-secondary mb-4 text-sm">
-                Open-source library for neural network compression with PyTorch integration.
+                🐍 Geometric Computer Vision Library for Spatial AI.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-xs bg-gray-100 px-2 py-1 rounded">⭐ 234 stars</span>
-                <a href="#" className="text-accent text-sm hover:text-primary">View on GitHub →</a>
+                <span className="text-xs bg-gray-100 px-2 py-1 rounded">⭐ 10.6k stars</span>
+                <a href="https://github.com/kornia/kornia" className="text-accent text-sm hover:text-primary">View on GitHub →</a>
               </div>
             </div>
             
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">Edge AI Deployment Tools</h3>
+              <h3 className="text-lg font-semibold mb-4">ReinforceBots</h3>
               <p className="text-secondary mb-4 text-sm">
-                Utilities and scripts for deploying AI models on edge devices and embedded systems.
+                Developing a chatbot by combining RL and NLP concepts.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-xs bg-gray-100 px-2 py-1 rounded">⭐ 156 stars</span>
-                <a href="#" className="text-accent text-sm hover:text-primary">View on GitHub →</a>
+                <span className="text-xs bg-gray-100 px-2 py-1 rounded">⭐ 3 stars</span>
+                <a href="https://github.com/apprenticearnab/ReinforceBots" className="text-accent text-sm hover:text-primary">View on GitHub →</a>
               </div>
             </div>
             
             <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">Computer Vision Benchmarks</h3>
+              <h3 className="text-lg font-semibold mb-4">Safety driving assist</h3>
               <p className="text-secondary mb-4 text-sm">
-                Standardized benchmarks and evaluation metrics for computer vision models.
+                Driver assist system to warn/stop the vehicle based on alertness score, calculated based on facial expressions.
               </p>
               <div className="flex items-center justify-between">
-                <span className="text-xs bg-gray-100 px-2 py-1 rounded">⭐ 89 stars</span>
-                <a href="#" className="text-accent text-sm hover:text-primary">View on GitHub →</a>
+                <span className="text-xs bg-gray-100 px-2 py-1 rounded">⭐ 9 stars</span>
+                <a href="https://github.com/reyanshsolis/safety_driving_assist" className="text-accent text-sm hover:text-primary">View on GitHub →</a>
               </div>
             </div>
           </div>

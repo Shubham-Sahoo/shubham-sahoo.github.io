@@ -17,10 +17,7 @@ export const metadata: Metadata = {
     title: "Shubham Sahoo",
     description: "Deep Learning Researcher",
   },
-  twitter: {
-    card: "summary_large_image",
-    creator: "@shubhamsahoo",
-  },
+  
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -35,10 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-[var(--space-24)] text-[var(--color-text-secondary)]">
           <div className="container flex flex-col items-center gap-[var(--space-16)]">
-            <div className="flex gap-[var(--space-16)]">
-              <a href="https://github.com/shubhamsahoo" className="text-[var(--font-size-base)] hover:text-[var(--color-primary)] transition-colors" aria-label="GitHub profile">GitHub</a>
-              <a href="https://linkedin.com/in/shubhamsahoo" className="text-[var(--font-size-base)] hover:text-[var(--color-primary)] transition-colors" aria-label="LinkedIn profile">LinkedIn</a>
-              <a href="https://twitter.com/shubhamsahoo" className="text-[var(--font-size-base)] hover:text-[var(--color-primary)] transition-colors" aria-label="Twitter profile">Twitter</a>
+            <div style={{ gap: "var(--space-16)" }} className="flex gap-[var(--space-16)]">
+              <a href="https://github.com/shubham-sahoo" className="text-[var(--font-size-base)] hover:text-[var(--color-primary)] transition-colors" aria-label="GitHub profile">GitHub</a>
+              <a href="https://www.linkedin.com/in/shubham-sahoo-62819b138" className="text-[var(--font-size-base)] hover:text-[var(--color-primary)] transition-colors" aria-label="LinkedIn profile">LinkedIn</a>
             </div>
             <p className="text-[var(--font-size-xs)] m-0">© {new Date().getFullYear()} Shubham Sahoo. All rights reserved.</p>
           </div>

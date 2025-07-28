@@ -66,7 +66,7 @@ export default function OpenSource() {
       try {
         setLoading(true);
 
-        const own = await octokit.rest.repos.listForUser({
+        const own = await octokit.rest.activity.listReposStarredByUser({
           username: "Shubham-Sahoo",
           per_page: 100,
         });
