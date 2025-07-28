@@ -22,7 +22,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${crimson.variable} ${fira.variable}`}>
-      <body className="bg-[var(--color-background)] text-[var(--color-text)] font-[var(--font-family-base)] antialiased flex flex-col pt-[64px] overflow-visible">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className="bg-[var(--color-background)] text-[var(--color-text)] font-[var(--font-family-base)] antialiased flex flex-col pt-[64px] overflow-visible min-h-[calc(100vh-64px)]">
         <Navbar />
         {children}
         <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-[var(--space-24)] text-[var(--color-text-secondary)] z-10">

@@ -1,97 +1,72 @@
-"use client";
+'use client';
 
-import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Projects", href: "/projects" },
-    { label: "Publications", href: "/publications" },
-    { label: "Contact", href: "/contact" },
-  ];
-
-  const handleNavigation = (href: string) => {
-    router.push(href);
-    setMobileMenuOpen(false);
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
   };
 
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/publications', label: 'Publications' },
+    { href: '/contact', label: 'Contact' },
+  ];
+
+  // Debug navLinks rendering
+  useEffect(() => {
+    console.log('Navbar navLinks:', navLinks);
+  }, []);
+
   return (
-    <nav className="bg-[var(--color-surface)] border-b border-[var(--color-border)] fixed top-0 left-0 w-full z-50 shadow-[var(--shadow-sm)]">
-      <div className="container flex items-center justify-between h-[64px]">
-        {/* Brand Name */}
-        <button
-          onClick={() => handleNavigation("/")}
-          className="text-[var(--font-size-xl)] font-[var(--font-family-serif)] font-[var(--font-weight-semibold)] text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors duration-[var(--duration-fast)] focus-visible:outline focus-visible:outline-[var(--focus-outline)] focus-visible:outline-offset-2"
-          aria-label="Go to homepage"
-        >
-          Shubham Sahoo
-        </button>
-
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-[var(--space-4)]">
-          {navItems.map(({ label, href }) => (
-            <button
-              key={href}
-              onClick={() => handleNavigation(href)}
-              className={`nav-link ${pathname === href ? "active" : ""}`}
-              aria-current={pathname === href ? "page" : undefined}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-[var(--space-4)] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] focus-visible:outline focus-visible:outline-[var(--focus-outline)] focus-visible:outline-offset-2"
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileMenuOpen}
-          data-testid="mobile-menu-toggle"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-            />
-          </svg>
-        </button>
+    <nav className="bg-[var(--color-surface)] h-[64px] flex items-center justify-between px-[var(--space-16)]">
+      <div className="text-[var(--font-size-lg)] font-[var(--font-weight-semibold)]">
+        <Link href="/">Shubham Sahoo</Link>
       </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`lg:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-standard)] ${
-          mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-        aria-hidden={!mobileMenuOpen}
+      <div className="nav-desktop flex items-center gap-[12px] flex-wrap">
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`nav-link ${pathname === link.href ? 'active' : ''}`}
+            aria-label={link.label}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
+      <button
+        className="lg:hidden text-[var(--font-size-lg)] focus-visible:outline-[var(--focus-outline)]"
+        onClick={toggleMenu}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-controls="mobile-menu"
+        aria-expanded={isOpen}
       >
-        <div className="container flex flex-col items-center gap-[var(--space-8)] py-[var(--space-8)]">
-          {navItems.map(({ label, href }) => (
-            <button
-              key={href}
-              onClick={() => handleNavigation(href)}
-              className={`nav-link w-full text-center ${pathname === href ? "active" : ""}`}
-              aria-current={pathname === href ? "page" : undefined}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        {isOpen ? '✕' : '☰'}
+      </button>
+      <div
+        id="mobile-menu"
+        className="nav-mobile absolute top-[64px] left-0 w-full"
+        aria-hidden={!isOpen}
+      >
+        {navLinks.map((link) => (
+          <Link
+            key={`${link.href}-mobile`}
+            href={link.href}
+            className={`nav-link ${pathname === link.href ? 'active' : ''}`}
+            onClick={() => setIsOpen(false)}
+            aria-label={link.label}
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
     </nav>
   );
