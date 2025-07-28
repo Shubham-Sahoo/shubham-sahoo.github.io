@@ -40,8 +40,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <Link href="/research" className="btn btn--primary">
-              View Research
+            <Link href="/projects" className="btn btn--primary">
+              View Projects
             </Link>
             <Link href="/contact" className="btn btn--secondary">
               Contact Me
@@ -104,11 +104,6 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
-        <div className="mt-16 text-right">
-          <Link href="/research" className="btn btn--primary">
-            View All Research
-          </Link>
         </div>
       </section>
     </main>
