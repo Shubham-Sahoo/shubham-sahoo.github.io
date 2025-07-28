@@ -17,20 +17,15 @@ export const metadata: Metadata = {
     title: "Shubham Sahoo",
     description: "Deep Learning Researcher",
   },
-  
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${crimson.variable} ${fira.variable}`}>
-      <body className="bg-[var(--color-background)] text-[var(--color-text)] font-[var(--font-family-base)] antialiased min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50">
-          <Navbar />
-        </header>
-        <main className="flex-1 py-[var(--space-24)]">
-          {children}
-        </main>
-        <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-[var(--space-24)] text-[var(--color-text-secondary)]">
+      <body className="bg-[var(--color-background)] text-[var(--color-text)] font-[var(--font-family-base)] antialiased flex flex-col pt-[64px] overflow-visible">
+        <Navbar />
+        {children}
+        <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-[var(--space-24)] text-[var(--color-text-secondary)] z-10">
           <div className="container flex flex-col items-center gap-[var(--space-16)]">
             <div style={{ gap: "var(--space-16)" }} className="flex gap-[var(--space-16)]">
               <a href="https://github.com/shubham-sahoo" className="text-[var(--font-size-base)] hover:text-[var(--color-primary)] transition-colors" aria-label="GitHub profile">GitHub</a>

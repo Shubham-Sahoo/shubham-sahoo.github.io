@@ -22,7 +22,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-[var(--color-surface)] border-b border-[var(--color-border)] sticky top-0 z-50 shadow-[var(--shadow-sm)]">
+    <nav className="bg-[var(--color-surface)] border-b border-[var(--color-border)] fixed top-0 left-0 w-full z-50 shadow-[var(--shadow-sm)]">
       <div className="container flex items-center justify-between h-[64px]">
         {/* Brand Name */}
         <button
@@ -52,14 +52,14 @@ export default function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden p-[var(--space-4)] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] focus-visible:outline focus-visible:outline-[var(--focus-outline)] focus-visible:outline-offset-2"
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileMenuOpen ? "true" : "false"}
+          aria-expanded={mobileMenuOpen}
           data-testid="mobile-menu-toggle"
         >
           <svg
             className="w-6 h-6"
             fill="none"
             stroke="currentColor"
-            viewBox="0 24 24"
+            viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
           >
@@ -75,9 +75,10 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)] overflow-hidden transition-all duration-[var(--duration-normal)] ease-[var(--ease-standard)] ${
+        className={`lg:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-standard)] ${
           mobileMenuOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
+        aria-hidden={!mobileMenuOpen}
       >
         <div className="container flex flex-col items-center gap-[var(--space-8)] py-[var(--space-8)]">
           {navItems.map(({ label, href }) => (

@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="bg-[var(--color-background)]">
       {/* Hero Section */}
-      <section className="section flex flex-col lg:flex-row items-center justify-between gap-16">
+      <section className="section-sm flex flex-col lg:flex-row items-center justify-between gap-16">
         <div className="max-w-[600px]">
           <motion.h1
             className="text-[56px] font-[var(--font-family-serif)] font-[var(--font-weight-bold)] text-[var(--color-text)]"

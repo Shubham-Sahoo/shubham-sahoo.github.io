@@ -1,10 +1,10 @@
 export default function About() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background ">
       
       {/* Header Section */}
       <section className="section bg-white">
-        <div className="container-narrow">
+        <div className="container-narrow ">
           <div className="text-center mb-16">
             <h1 className="text-4xl lg:text-5xl font-serif font-bold text-primary mb-6">
               About Me
@@ -228,7 +228,7 @@ export default function About() {
       </section>
 
       {/* Personal Philosophy */}
-      <section className="section bg-white">
+      <section className="section-sm bg-white">
         <div className="container-narrow">
           <h2 className="text-3xl font-serif font-semibold text-center mb-12">
             Research Philosophy
