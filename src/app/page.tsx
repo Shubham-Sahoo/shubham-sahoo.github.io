@@ -32,7 +32,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            I specialize in [Your Research Area]. Explore my work in research, publications, and projects.
+            I specialize in Computer Vision, Generative AI and Embedded Systems. Explore my work in research, publications, and projects.
           </motion.p>
           <motion.div
             className="flex gap-8"
@@ -71,8 +71,9 @@ export default function Home() {
           About Me
         </h2>
         <p className="text-[var(--font-size-lg)] text-[var(--color-text-secondary)]">
-          I am a dedicated researcher with a passion for [Your Research Interest].
-          My work focuses on [Brief Description]. Learn more about my journey and contributions.
+          I am a dedicated researcher with a passion for developing intelligent systems that bridge the gap between theoretical innovation and real-world application.
+          My work focuses on deep learning, computer vision, and efficient neural network deployment, particularly for edge devices and production-scale AI systems.
+          Learn more about my journey and contributions as I continue to explore ways to make AI more accessible, impactful, and responsible.
         </p>
         <div className="mt-16">
           <Link href="/about" className="btn btn--primary">
@@ -89,17 +90,17 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-24">
           <div className="card">
             <div className="card__body">
-              <h3>Project Title 1</h3>
+              <h3>FitDit Vision Transformer Implementation</h3>
               <p className="text-[var(--color-text-secondary)]">
-                A brief description of your research project. Highlight key findings or contributions.
+                Novel approach to convert flat-lay to model images with FitDiT architecture, refined apparel masks to improve garment alignment and realism, attention mechanism improvements, and training strategies.
               </p>
             </div>
           </div>
           <div className="card">
             <div className="card__body">
-              <h3>Project Title 2</h3>
+              <h3>Active Perception using Light Curtains</h3>
               <p className="text-[var(--color-text-secondary)]">
-                A brief description of another research project. Highlight key findings or contributions.
+                Collaborative research with CMU RPAD Labs on developing novel perception systems for autonomous vehicles using light curtain sensors for efficient obstacle detection and navigation.
               </p>
             </div>
           </div>

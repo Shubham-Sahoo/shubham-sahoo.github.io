@@ -25,6 +25,8 @@ export default function About() {
             <p className="text-lg leading-relaxed text-text-primary mb-6">
               I am an experienced Deep Learning Research Engineer with a diverse background 
               spanning embedded systems, wireless communications, and artificial intelligence. 
+              I graduated from <strong>IIT Kharagpur</strong> with a dual degree in <strong>Electronics and Electrical Communications Engineering (E&ECE)</strong>, 
+              where I built a strong foundation in both theoretical and applied aspects of engineering.
               Currently working at <strong>NeuroPixel.AI</strong>, I focus on developing 
               innovative solutions that push the boundaries of what&apos;s possible with neural networks.
             </p>
@@ -97,7 +99,7 @@ export default function About() {
               <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                 <div className="lg:w-48 flex-shrink-0">
                   <div className="bg-accent text-white px-4 py-2 rounded-lg text-center">
-                    <div className="font-semibold">2023</div>
+                    <div className="font-semibold">2020</div>
                     <div className="text-sm opacity-90">Research</div>
                   </div>
                 </div>
@@ -121,8 +123,6 @@ export default function About() {
                     <ul className="list-disc pl-6 space-y-2 text-secondary">
                       <li>Developed novel perception algorithms for autonomous systems</li>
                       <li>Implemented real-time processing pipelines for sensor data</li>
-                      <li>Contributed to research publications and patent applications</li>
-                      <li>Collaborated with interdisciplinary teams on robotics projects</li>
                     </ul>
                   </div>
                 </div>
@@ -134,13 +134,13 @@ export default function About() {
               <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                 <div className="lg:w-48 flex-shrink-0">
                   <div className="bg-secondary text-white px-4 py-2 rounded-lg text-center">
-                    <div className="font-semibold">2021 - 2023</div>
+                    <div className="font-semibold">2022 - 2023</div>
                     <div className="text-sm opacity-90">Industry</div>
                   </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-serif font-semibold text-primary mb-2">
-                    Embedded Systems Engineer
+                    Software Engineer
                   </h3>
                   <p className="text-lg font-medium text-secondary mb-4">
                     Analog Devices
@@ -153,44 +153,9 @@ export default function About() {
                     </p>
                     <ul className="list-disc pl-6 space-y-2 text-secondary">
                       <li>Designed and implemented embedded software solutions</li>
-                      <li>Optimized algorithms for resource-constrained environments</li>
-                      <li>Developed real-time signal processing systems</li>
-                      <li>Led cross-functional teams on product development projects</li>
+                      <li>Optimized speech miss rate for Voice Activity Detection inside vehicles</li>
+                      <li>Integrated Dolby Atmos In-Car Experience decoder inside a synchronous network using DMA interrupts and GPIO</li>
                       <li>Gained deep understanding of hardware limitations and opportunities</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* PhD Research */}
-            <div className="timeline-item">
-              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <div className="lg:w-48 flex-shrink-0">
-                  <div className="bg-success text-white px-4 py-2 rounded-lg text-center">
-                    <div className="font-semibold">2019 - 2021</div>
-                    <div className="text-sm opacity-90">Academic</div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-serif font-semibold text-primary mb-2">
-                    PhD Research Scholar
-                  </h3>
-                  <p className="text-lg font-medium text-secondary mb-4">
-                    Wireless Communications & Intelligent Systems
-                  </p>
-                  <div className="prose max-w-none">
-                    <p className="mb-4">
-                      Conducted fundamental research in wireless networks, 5G communications, 
-                      and intelligent systems. Published multiple papers in top-tier conferences 
-                      and developed novel algorithms for network optimization.
-                    </p>
-                    <ul className="list-disc pl-6 space-y-2 text-secondary">
-                      <li>Published research on 5G heterogeneous networks</li>
-                      <li>Developed algorithms for autonomous vehicle communication</li>
-                      <li>Created prototypes for intelligent ground vehicles</li>
-                      <li>Presented at international conferences and workshops</li>
-                      <li>Mentored undergraduate researchers and students</li>
                     </ul>
                   </div>
                 </div>
@@ -219,7 +184,6 @@ export default function About() {
                 <li>Transfer Learning</li>
                 <li>Neural Network Optimization</li>
                 <li>Model Compression</li>
-                <li>Reinforcement Learning</li>
               </ul>
             </div>
 
@@ -242,10 +206,8 @@ export default function About() {
               <ul className="space-y-2 text-sm text-secondary">
                 <li>Embedded Systems</li>
                 <li>Real-time Processing</li>
-                <li>Edge Computing</li>
                 <li>GPU Optimization</li>
                 <li>Hardware Acceleration</li>
-                <li>IoT Systems</li>
               </ul>
             </div>
 
@@ -258,7 +220,6 @@ export default function About() {
                 <li>Technical Writing</li>
                 <li>Patent Development</li>
                 <li>Conference Presentations</li>
-                <li>Peer Review</li>
               </ul>
             </div>
 
@@ -275,7 +236,7 @@ export default function About() {
           
           <div className="prose prose-lg max-w-none text-center">
             <blockquote className="text-xl italic border-l-4 border-accent pl-6 my-8">
-              &quot;The best research doesn&apos;t just advance our understanding—it creates 
+              &quot;The best research doesn&apos;t just advance our understanding-it creates 
               tangible value that improves people&apos;s lives and solves real problems.&quot;
             </blockquote>
             

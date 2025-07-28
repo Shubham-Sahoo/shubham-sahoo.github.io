@@ -9,39 +9,55 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Neural Network Compression for Edge Devices",
+      title: "FitDit Vision Transformer Implementation",
       category: "Research",
-      status: "Active",
-      timeline: "2024 - Present",
-      description: "Developing advanced model compression techniques including pruning, quantization, and knowledge distillation to enable efficient neural network deployment on resource-constrained edge devices.",
-      technologies: ["PyTorch", "TensorRT", "ONNX", "OpenVINO", "ARM Cortex"],
+      status: "Completed",
+      timeline: "2024-2025",
+      description: "Novel approach to convert flat-lay to model images with FitDiT architecture, refined apparel masks to improve garment alignment and realism, attention mechanism improvements, and training strategies.",
+      technologies: ["PyTorch", "Transformers", "CUDA", "TensorBoard", "Weights & Biases"],
       objectives: [
-        "Achieve 10x model size reduction with <2% accuracy loss",
-        "Implement hardware-aware neural architecture search",
-        "Develop dynamic quantization algorithms",
-        "Create deployment pipelines for edge devices"
+        "Increased apparel context by change in masking",
+        "Updated loss function to use DFT loss for better convergence and fidelity"
       ],
       impact: {
-        metric: "Model Efficiency",
-        value: "8.5x faster inference",
-        additional: "85% reduction in memory usage"
+        metric: "Quality Gain",
+        value: "Better texture",
       },
       links: {
-        github: "#",
-        paper: "#",
-        demo: "#"
       },
-      image: "/placeholder-project-1.jpg",
-      collaborators: ["NeuroPixel.AI Team", "Industry Partners"]
+      image: "/placeholder-project-6.jpg",
+      collaborators: ["NeuroPixel.AI Research"]
     },
     {
       id: 2,
+      title: "Real-time Segmentation Pipeline",
+      category: "Applied AI",
+      status: "Production",
+      timeline: "2024 - Present",
+      description: "Production-grade object segmentation system optimized for real-time performance in apparel segmentation application, featuring TensorRT conversion and efficient post-processing.",
+      technologies: ["Segment Anything Model (Meta AI)", "TensorRT", "CUDA", "Docker", "Kubernetes", "FastAPI"],
+      objectives: [
+        "Process 0.5 FPS on standard CPUs",
+        "Deploy scalable inference services",
+        "Implement model versioning and A/B testing"
+      ],
+      impact: {
+        metric: "Processing Speed",
+        value: "0.5 FPS average",
+      },
+      links: {
+      },
+      image: "/placeholder-project-3.jpg",
+      collaborators: ["NeuroPixel.AI"]
+    },
+    {
+      id: 3,
       title: "Active Perception using Light Curtains",
       category: "Research",
       status: "Collaboration",
       timeline: "2023",
       description: "Collaborative research with CMU RPAD Labs on developing novel perception systems for autonomous vehicles using light curtain sensors for efficient obstacle detection and navigation.",
-      technologies: ["Python", "ROS", "OpenCV", "Light Curtain Sensors", "C++"],
+      technologies: ["Python", "OpenCV", "Light Curtain Sensors", "C++", "Graph Neural Networks"],
       objectives: [
         "Develop real-time light curtain processing algorithms",
         "Implement adaptive sensing strategies",
@@ -51,50 +67,44 @@ export default function Projects() {
       impact: {
         metric: "Detection Accuracy",
         value: "95% precision",
-        additional: "30% faster than traditional LiDAR"
       },
       links: {
-        github: "#",
-        paper: "#",
-        video: "#"
+        github: "https://github.com/Shubham-Sahoo/ObjectDetection?tab=readme-ov-file",
+        paper: "https://siddancha.github.io/projects/active-perception-light-curtains/",
+        video: "https://www.youtube.com/watch?v=WSb5T3HFE7w"
       },
-      image: "/placeholder-project-2.jpg",
-      collaborators: ["CMU RPAD Labs", "Carnegie Mellon University"]
-    },
-    {
-      id: 3,
-      title: "Real-time Object Detection Pipeline",
-      category: "Applied AI",
-      status: "Production",
-      timeline: "2023 - 2024",
-      description: "Production-grade object detection system optimized for real-time performance in surveillance and monitoring applications, featuring custom CNN architectures and efficient post-processing.",
-      technologies: ["TensorFlow", "CUDA", "Docker", "Kubernetes", "FastAPI"],
-      objectives: [
-        "Process 60+ FPS on standard GPUs",
-        "Achieve >90% mAP on custom datasets",
-        "Deploy scalable inference services",
-        "Implement model versioning and A/B testing"
-      ],
-      impact: {
-        metric: "Processing Speed",
-        value: "65 FPS average",
-        additional: "Deployed across 50+ cameras"
-      },
-      links: {
-        github: "#",
-        docs: "#",
-        api: "#"
-      },
-      image: "/placeholder-project-3.jpg",
-      collaborators: ["NeuroPixel.AI", "Security Partners"]
+      image: "https://github.com/Shubham-Sahoo/ObjectDetection/blob/master/images/thumbnail.gif",
+      collaborators: ["CMU RPAD Labs", "Siddharth Ancha", "Prof. David Held"]
     },
     {
       id: 4,
+      title: "MLOps Platform for Model Deployment",
+      category: "Infrastructure",
+      status: "Active",
+      timeline: "2024 - Present",
+      description: "Comprehensive MLOps platform enabling seamless model development, validation, and deployment with automated CI/CD pipelines and monitoring capabilities.",
+      technologies: ["Kubernetes", "Docker", "Prometheus", "Grafana", "Loki", "GPU-slicing"],
+      objectives: [
+        "Implement comprehensive model monitoring",
+        "Enable A/B testing for model deployments",
+        "Create reusable deployment templates"
+      ],
+      impact: {
+        metric: "Inference Speed",
+        value: "75% faster",
+      },
+      links: {
+      },
+      image: "/placeholder-project-5.jpg",
+      collaborators: ["NeuroPixel.AI", "DevOps Team"]
+    },
+    {
+      id: 5,
       title: "Intelligent Ground Vehicle Prototype",
       category: "Robotics",
       status: "Completed",
       timeline: "2019",
-      description: "Design and development of an autonomous ground vehicle capable of navigation in constrained environments using sensor fusion, path planning, and machine learning algorithms.",
+      description: "Design and development of an autonomous ground vehicle capable of navigation in constrained environments using sensor fusion, path planning, and lane detection algorithms.",
       technologies: ["ROS", "Gazebo", "OpenCV", "Python", "Arduino", "Sensors"],
       objectives: [
         "Implement autonomous navigation in GPS-denied environments",
@@ -104,68 +114,13 @@ export default function Projects() {
       ],
       impact: {
         metric: "Navigation Accuracy",
-        value: "92% success rate",
-        additional: "Published in ICCRT 2019"
+        value: "Published in ICCRT 2019",
       },
       links: {
-        paper: "#",
-        video: "#",
-        slides: "#"
+        paper: "https://dl.acm.org/doi/abs/10.1145/3387304.3387321",
       },
       image: "/placeholder-project-4.jpg",
-      collaborators: ["University Research Team"]
-    },
-    {
-      id: 5,
-      title: "MLOps Platform for Model Deployment",
-      category: "Infrastructure",
-      status: "Active",
-      timeline: "2024 - Present",
-      description: "Comprehensive MLOps platform enabling seamless model development, training, validation, and deployment with automated CI/CD pipelines and monitoring capabilities.",
-      technologies: ["Kubernetes", "Docker", "MLflow", "Apache Airflow", "Prometheus", "Grafana"],
-      objectives: [
-        "Automate model training and validation pipelines",
-        "Implement comprehensive model monitoring",
-        "Enable A/B testing for model deployments",
-        "Create reusable deployment templates"
-      ],
-      impact: {
-        metric: "Deployment Speed",
-        value: "50% faster",
-        additional: "99.9% uptime achieved"
-      },
-      links: {
-        github: "#",
-        docs: "#"
-      },
-      image: "/placeholder-project-5.jpg",
-      collaborators: ["DevOps Team", "ML Engineers"]
-    },
-    {
-      id: 6,
-      title: "Vision Transformer Optimization",
-      category: "Research",
-      status: "Under Review",
-      timeline: "2024",
-      description: "Novel approach to optimizing Vision Transformers for real-time applications through architectural innovations, attention mechanism improvements, and training strategies.",
-      technologies: ["PyTorch", "Transformers", "CUDA", "TensorBoard", "Weights & Biases"],
-      objectives: [
-        "Reduce ViT computational complexity by 60%",
-        "Maintain competitive accuracy on ImageNet",
-        "Enable real-time inference on edge devices",
-        "Develop efficient attention mechanisms"
-      ],
-      impact: {
-        metric: "Efficiency Gain",
-        value: "5.2x speedup",
-        additional: "Submitted to NeurIPS 2024"
-      },
-      links: {
-        paper: "#",
-        code: "#"
-      },
-      image: "/placeholder-project-6.jpg",
-      collaborators: ["NeuroPixel.AI Research"]
+      collaborators: ["Autonomous Ground Vehicle Research Group, IIT Kharagpur"]
     }
   ];
 
@@ -403,7 +358,7 @@ export default function Projects() {
                         key={index}
                         className="bg-gray-100 px-2 py-1 rounded text-xs text-secondary"
                       >
-                        {tech}
+                        {tech},
                       </span>
                     ))}
                   </div>
@@ -445,7 +400,7 @@ export default function Projects() {
                         key={index}
                         className="text-xs text-secondary bg-blue-50 px-2 py-1 rounded"
                       >
-                        {collab}
+                        {collab},
                       </span>
                     ))}
                   </div>
