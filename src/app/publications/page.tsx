@@ -1,315 +1,210 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
+import Navbar from "../components/Navbar";
+
+const PUBS = [
+  {
+    id: 1,
+    title: "Efficient last-mile link adaptation in next-gen wireless heterogeneous networks",
+    authors: ["Shubham Sahoo", "Preeti S. Pati", "Raja Datta"],
+    venue: "COMSNETS 2022",
+    year: 2022,
+    type: "Conference",
+    doi: "10.1109/COMSNETS53615.2022.9668503",
+    url: "https://ieeexplore.ieee.org/document/9668503",
+    citations: 1,
+    abstract: "A novel approach to link adaptation in heterogeneous wireless networks, optimising last-mile connectivity through intelligent resource allocation and dynamic protocol adaptation.",
+    tags: ["Wireless Networks", "5G", "Link Adaptation"],
+  },
+  {
+    id: 2,
+    title: "A novel machine learning approach for link adaptation in 5G wireless networks",
+    authors: ["Shubham Sahoo", "Preeti S. Pati", "Raja Datta"],
+    venue: "PhD EDITS 2020",
+    year: 2020,
+    type: "Conference",
+    doi: "10.1109/PhDEDITS51180.2020.9315299",
+    url: "https://ieeexplore.ieee.org/abstract/document/9315299",
+    citations: 6,
+    abstract: "Deep Neural Network-based Link Adaptation scheme for 5G NR Sub-6GHz networks. Optimises spectral efficiency by selecting the best Modulation and Coding Scheme.",
+    tags: ["5G", "Machine Learning", "DNN", "Link Adaptation"],
+  },
+  {
+    id: 3,
+    title: "A prototype of an intelligent ground vehicle for constrained environment: Design and development",
+    authors: ["Shubham Sahoo", "Debashish Chakravarty", "et al."],
+    venue: "ICCRT 2019",
+    year: 2019,
+    type: "Conference",
+    doi: "10.1145/3387304.3387321",
+    url: "https://dl.acm.org/doi/abs/10.1145/3387304.3387321",
+    citations: 2,
+    abstract: "Design and development of an intelligent ground vehicle prototype operating in constrained environments using advanced sensor fusion and machine learning algorithms.",
+    tags: ["Robotics", "Autonomous Vehicles", "Sensor Fusion"],
+  },
+];
+
+const C = {
+  bg: "#0C0C0E", surface: "#111113", border: "rgba(255,255,255,0.07)",
+  accent: "#5DC8A5", tp: "rgba(255,255,255,0.93)",
+  tm: "rgba(255,255,255,0.5)", td: "rgba(255,255,255,0.25)",
+};
+
+function hIndex(pubs: { citations: number }[]) {
+  const sorted = [...pubs].sort((a, b) => b.citations - a.citations);
+  let h = 0;
+  for (let i = 0; i < sorted.length; i++) {
+    if (sorted[i].citations >= i + 1) h = i + 1; else break;
+  }
+  return h;
+}
 
 export default function Publications() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedYear, setSelectedYear] = useState("all");
-  const [selectedType, setSelectedType] = useState("all");
+  const [search, setSearch] = useState("");
+  const [year, setYear] = useState("all");
 
-  // Your publications data array
-  const publications = [
-    {
-      id: 1,
-      title: "Efficient last-mile link adaptation in next-gen wireless heterogeneous networks",
-      authors: ["Shubham Sahoo", "Preeti S. Pati", "Raja Datta"],
-      venue: "14th International Conference on Communication Systems and Networks (COMSNETS)",
-      year: 2022,
-      type: "Conference",
-      pages: "31-36",
-      doi: "10.1109/COMSNETS53615.2022.9668503",
-      pdf: "#",
-      citations: 1,
-      abstract: "This paper presents a novel approach to link adaptation in heterogeneous wireless networks, focusing on optimizing the last-mile connectivity through intelligent resource allocation and dynamic protocol adaptation.",
-      tags: ["Wireless Networks", "5G", "Link Adaptation", "Heterogeneous Networks"],
-      status: "Published"
-    },
-    {
-      id: 2,
-      title: "A prototype of an intelligent ground vehicle for constrained environment: Design and development",
-      authors: ["Shubham Sahoo", "Debashish Chakravarty", "et. al"],
-      venue: "International Conference on Computer, Communication and Robotic Technology (ICCRT)",
-      year: 2019,
-      type: "Conference",
-      pages: "103-107",
-      doi: "10.1145/3387304",
-      pdf: "#",
-      citations: 2,
-      abstract: "This work presents the design and development of an intelligent ground vehicle prototype capable of operating in constrained environments using advanced sensor fusion and machine learning algorithms.",
-      tags: ["Robotics", "Autonomous Vehicles", "Sensor Fusion", "Machine Learning"],
-      status: "Published"
-    },
-    {
-      id: 3,
-      title: "A novel machine learning approach for link adaptation in 5g wireless networks",
-      authors: ["Shubham Sahoo", "Preeti S. Pati", "Raja Datta"],
-      venue: "2020 2nd PhD Colloquium on Ethically Driven Innovation and Technology for Society (PhD EDITS)",
-      year: 2020,
-      type: "Conference",
-      pages: "1-2",
-      doi: "10.1109/PhDEDITS51180.2020.9315299",
-      pdf: "#",
-      citations: 6,
-      abstract: "This study presents a Deep Neural Network-based Link Adaptation scheme for 5G NR Sub-6GHz networks that optimizes spectral efficiency by selecting the best Modulation and Coding Scheme.",
-      tags: ["Wireless Networks", "5G", "Machine Learning", "Heterogeneous Networks"],
-      status: "Published"
-    },
-  ];
+  const filtered = useMemo(() => PUBS.filter(p => {
+    const q = search.toLowerCase();
+    const matchQ = !q || p.title.toLowerCase().includes(q) || p.authors.some(a => a.toLowerCase().includes(q)) || p.tags.some(t => t.toLowerCase().includes(q));
+    const matchY = year === "all" || p.year.toString() === year;
+    return matchQ && matchY;
+  }), [search, year]);
 
-  // Filtering logic
-  const filteredPublications = useMemo(() => {
-    return publications.filter((pub) => {
-      const matchesSearch = searchTerm === "" || 
-        pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.authors.some(author => author.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        pub.venue.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-      
-      const matchesYear = selectedYear === "all" || pub.year.toString() === selectedYear;
-      const matchesType = selectedType === "all" || pub.type === selectedType;
-      
-      return matchesSearch && matchesYear && matchesType;
-    });
-  }, [searchTerm, selectedYear, selectedType]);
-
-  // Unique years and types for filters
-  const years = [...new Set(publications.map(pub => pub.year))].sort((a, b) => b - a);
-  const types = [...new Set(publications.map(pub => pub.type))];
-
-  const totalCitations = publications.reduce((sum, pub) => sum + pub.citations, 0);
-  const hIndex = calculateHIndex(publications);
-
-  interface Publication {
-    citations: number;
-  }
-
-  function calculateHIndex(pubs: Publication[]): number {
-    const sortedCitations = pubs
-      .map((p) => p.citations)
-      .sort((a, b) => b - a);
-
-    let h = 0;
-    for (let i = 0; i < sortedCitations.length; i++) {
-      if (sortedCitations[i] >= i + 1) {
-        h = i + 1;
-      } else {
-        break;
-      }
-    }
-    return h;
-  }
+  const years = [...new Set(PUBS.map(p => p.year))].sort((a, b) => b - a);
+  const totalCite = PUBS.reduce((s, p) => s + p.citations, 0);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="section bg-white">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-5xl font-serif font-bold text-primary mb-6">
-              Publications
-            </h1>
-            <p className="text-xl text-secondary leading-relaxed max-w-3xl mx-auto mb-8">
-              Research contributions spanning deep learning, computer vision, autonomous systems, 
-              and wireless communications, published in top-tier venues.
-            </p>
+    <div style={{ minHeight: "100vh", background: C.bg, color: C.tp, fontFamily: "'DM Sans', sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+        *, *::before, *::after { box-sizing: border-box; }
+        a { color: inherit; text-decoration: none; }
+        ::selection { background: rgba(93,200,165,0.2); }
+        input, select { outline: none; }
+        @media (max-width: 768px) {
+          .pub-row { grid-template-columns: 1fr !important; gap: 0.5rem !important; }
+          .metrics-grid { grid-template-columns: repeat(2,1fr) !important; }
+        }
+      `}</style>
 
-            {/* Publication Metrics */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <div className="bg-gray-50 p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold text-primary">{publications.length}</div>
-                <div className="text-sm text-secondary mt-1">Publications</div>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold text-primary">{totalCitations}</div>
-                <div className="text-sm text-secondary mt-1">Total Citations</div>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold text-primary">{hIndex}</div>
-                <div className="text-sm text-secondary mt-1">h-index</div>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg text-center">
-                <div className="text-4xl font-bold text-primary">
-                  {publications.filter(p => p.year >= 2023).length}
-                </div>
-                <div className="text-sm text-secondary mt-1">Recent (2023+)</div>
-              </div>
+      <Navbar />
+
+      <div style={{ maxWidth: "1080px", margin: "0 auto", padding: "5rem 2.5rem 3rem" }}>
+
+        {/* Header */}
+        <div style={{ marginBottom: "3rem" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: C.td, letterSpacing: ".14em", marginBottom: "1rem", display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ color: C.accent, opacity: .6 }}>▸</span> Publications
+          </div>
+          <h1 style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(36px,5vw,54px)", fontWeight: 400, lineHeight: 1.05, letterSpacing: "-.02em", marginBottom: "1rem" }}>
+            Research
+          </h1>
+          <p style={{ fontSize: "14px", color: C.tm, lineHeight: 1.75, maxWidth: "520px", fontWeight: 300 }}>
+            Published work spanning deep learning, wireless communications, and autonomous systems.
+          </p>
+        </div>
+
+        {/* Metrics */}
+        <div className="metrics-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "1px", border: `0.5px solid ${C.border}`, borderRadius: "6px", overflow: "hidden", maxWidth: "480px", marginBottom: "3rem" }}>
+          {[
+            { n: PUBS.length, l: "Publications" },
+            { n: totalCite, l: "Total citations" },
+            { n: hIndex(PUBS), l: "h-index" },
+            { n: years[0], l: "Latest year" },
+          ].map((s, i) => (
+            <div key={i} style={{ background: C.surface, padding: ".9rem 1rem", borderLeft: i > 0 ? `0.5px solid ${C.border}` : "none" }}>
+              <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "22px", color: C.accent, lineHeight: 1, marginBottom: "4px" }}>{s.n}</div>
+              <div style={{ fontSize: "10px", color: C.td, lineHeight: 1.4 }}>{s.l}</div>
             </div>
+          ))}
+        </div>
+
+        {/* Filters */}
+        <div style={{ display: "flex", gap: "12px", marginBottom: "2.5rem", flexWrap: "wrap" as const, alignItems: "center" }}>
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Search title, author, tag…"
+            style={{
+              background: C.surface, border: `0.5px solid ${C.border}`, borderRadius: "4px",
+              padding: "7px 12px", fontSize: "12px", color: C.tp,
+              fontFamily: "'JetBrains Mono', monospace", width: "260px",
+              letterSpacing: ".02em",
+            }}
+          />
+          <select
+            value={year}
+            onChange={e => setYear(e.target.value)}
+            style={{
+              background: C.surface, border: `0.5px solid ${C.border}`, borderRadius: "4px",
+              padding: "7px 12px", fontSize: "12px", color: C.tm,
+              fontFamily: "'JetBrains Mono', monospace", cursor: "pointer",
+            }}
+          >
+            <option value="all">All years</option>
+            {years.map(y => <option key={y} value={y}>{y}</option>)}
+          </select>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", color: C.td, letterSpacing: ".06em", marginLeft: "auto" }}>
+            {filtered.length} / {PUBS.length}
           </div>
         </div>
-      </section>
 
-      {/* Filters and Search */}
-      <section className="py-8 bg-gray-50 border-b border-gray-200">
-        <div className="container">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
-            {/* Search */}
-            <div className="w-full lg:w-96">
-              <input
-                type="text"
-                placeholder="Search publications, authors, venues..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-              />
-            </div>
-            {/* Filters */}
-            <div className="flex gap-4">
-              <select
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-              >
-                <option value="all">All Years</option>
-                {years.map(year => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-              >
-                <option value="all">All Types</option>
-                {types.map(type => (
-                  <option key={type} value={type}>{type}</option>
-                ))}
-              </select>
-            </div>
-            {/* External Links */}
-            <div className="flex gap-2">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-accent transition-colors text-sm"
-              >
-                Google Scholar
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-gray-600 transition-colors text-sm"
-              >
-                ORCID
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+        {/* Publications list */}
+        <div style={{ display: "flex", flexDirection: "column" as const }}>
+          {filtered.map((p, i) => (
+            <div key={p.id} className="pub-row" style={{
+              display: "grid", gridTemplateColumns: "140px 1fr", gap: "3rem",
+              padding: "2.25rem 0",
+              borderBottom: i < filtered.length - 1 ? `0.5px solid ${C.border}` : "none",
+            }}>
+              {/* Left */}
+              <div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: C.td, lineHeight: 1.7 }}>{p.venue}</div>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: C.td, marginTop: "4px" }}>{p.year}</div>
+                {p.citations > 0 && (
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", color: C.accent, marginTop: "8px" }}>↗ {p.citations} citations</div>
+                )}
+              </div>
 
-      {/* Publications List */}
-      <section className="section">
-        <div className="container">
-          <div className="mb-6">
-            <p className="text-secondary">
-              Showing {filteredPublications.length} of {publications.length} publications
-            </p>
-          </div>
-          <div className="space-y-8">
-            {filteredPublications.map((pub) => (
-              <div key={pub.id} className="card hover:shadow-lg transition-shadow">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-serif font-semibold text-primary mb-2 leading-tight">
-                      {pub.title}
-                    </h3>
-                    <p className="text-secondary mb-2">
-                      {pub.authors.map((author, index) => (
-                        <span key={index}>
-                          <span className={author === "Shubham Sahoo" ? "font-semibold" : ""}>
-                            {author}
-                          </span>
-                          {index < pub.authors.length - 1 && ", "}
-                        </span>
-                      ))}
-                    </p>
-                  </div>
-                  <div className="ml-4 flex flex-col items-end gap-2">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      pub.status === "Published" 
-                        ? "bg-green-100 text-green-800"
-                        : pub.status === "Under Review"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}>
-                      {pub.status}
+              {/* Right */}
+              <div>
+                <a href={p.url} target="_blank" rel="noopener noreferrer"
+                  style={{ fontSize: "15px", fontWeight: 500, lineHeight: 1.4, display: "block", marginBottom: "8px", transition: "color .2s" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = C.accent)}
+                  onMouseLeave={e => (e.currentTarget.style.color = C.tp)}
+                >{p.title}</a>
+
+                <div style={{ fontSize: "12px", color: C.tm, marginBottom: "10px", lineHeight: 1.5 }}>
+                  {p.authors.map((a, i) => (
+                    <span key={i} style={{ fontWeight: a === "Shubham Sahoo" ? 500 : 400, color: a === "Shubham Sahoo" ? C.tp : C.tm }}>
+                      {a}{i < p.authors.length - 1 ? ", " : ""}
                     </span>
-                    <span className="bg-gray-100 px-2 py-1 rounded text-xs text-secondary">
-                      {pub.type}
-                    </span>
-                  </div>
+                  ))}
                 </div>
-                {/* Venue and Details */}
-                <div className="mb-4">
-                  <p className="font-medium text-secondary italic mb-1">{pub.venue}</p>
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
-                    <span>{pub.year}</span>
-                    {pub.pages !== "Under Review" && <span>Pages: {pub.pages}</span>}
-                    {pub.citations > 0 && <span>Citations: {pub.citations}</span>}
-                    {pub.doi !== "TBD" && (
-                      <a href={`https://doi.org/${pub.doi}`} className="text-accent hover:text-primary">
-                        DOI: {pub.doi}
-                      </a>
-                    )}
-                  </div>
+
+                <p style={{ fontSize: "12px", color: C.tm, lineHeight: 1.65, marginBottom: "1rem" }}>{p.abstract}</p>
+
+                <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "5px", marginBottom: "1rem" }}>
+                  {p.tags.map(t => (
+                    <span key={t} style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "8px", padding: "2px 7px", border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: "3px", color: "rgba(255,255,255,0.35)" }}>{t}</span>
+                  ))}
                 </div>
-                {/* Abstract */}
-                <div className="mb-4">
-                  <p className="text-secondary leading-relaxed">{pub.abstract}</p>
-                </div>
-                {/* Tags */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {pub.tags.map((tag, index) => (
-                      <span 
-                        key={index}
-                        className="bg-gray-100 px-2 py-1 rounded text-xs text-secondary"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                {/* Actions */}
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
-                  <a
-                    href={pub.pdf}
-                    className="px-4 py-2 bg-accent text-white rounded hover:bg-primary transition-colors text-sm"
-                  >
-                    📄 PDF
-                  </a>
-                  <button className="px-4 py-2 bg-gray-100 text-secondary rounded hover:bg-gray-200 transition-colors text-sm">
-                    📋 BibTeX
-                  </button>
-                  {pub.citations > 0 && (
-                    <button className="px-4 py-2 bg-gray-100 text-secondary rounded hover:bg-gray-200 transition-colors text-sm">
-                      📊 Citations ({pub.citations})
-                    </button>
-                  )}
-                  <button className="px-4 py-2 bg-gray-100 text-secondary rounded hover:bg-gray-200 transition-colors text-sm">
-                    🔗 Share
-                  </button>
+
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", color: C.td, letterSpacing: ".04em" }}>
+                  DOI: <a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer" style={{ color: C.tm }}>{p.doi}</a>
                 </div>
               </div>
-            ))}
-          </div>
-          {/* No Results */}
-          {filteredPublications.length === 0 && (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">📚</div>
-              <h3 className="text-xl font-semibold mb-2">No publications found</h3>
-              <p className="text-secondary">
-                Try adjusting your search criteria or filters.
-              </p>
             </div>
-          )}
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* Research Impact and Recognition */}
-      {/* ...other sections as per your original code can go here... */}
+      <footer style={{ borderTop: `0.5px solid ${C.border}`, padding: "1.5rem 2.5rem", display: "flex", justifyContent: "space-between", maxWidth: "1080px", margin: "0 auto" }}>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", color: C.td }}>SHUBHAM SAHOO · 2025</span>
+        <Link href="/" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", color: C.td }}>← home</Link>
+      </footer>
     </div>
   );
 }
