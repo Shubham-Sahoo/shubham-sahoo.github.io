@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Shubham Sahoo – Deep Learning Engineer",
+  title: "Shubham Sahoo",
   description: "Machine Learning Engineer at Snap Inc. London. Building diffusion models, LoRA adapters, and on-device generative systems.",
   authors: [{ name: "Shubham Sahoo" }],
   openGraph: {
@@ -25,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={dmSans.variable}>
       <head>
+        <link rel="icon" href="/icon.png" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

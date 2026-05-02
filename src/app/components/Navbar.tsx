@@ -140,7 +140,7 @@ export default function Navbar() {
       `}</style>
 
       <nav className={`navbar ${scrolled ? "scrolled" : ""} ${mobileOpen ? "mobile-open" : ""}`}>
-        <Link href="/" className="nav-brand">SS/</Link>
+        <Link href="/" className="nav-brand">Shubham/</Link>
 
         {/* Desktop */}
         <div className="nav-links">
