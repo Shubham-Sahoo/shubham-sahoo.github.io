@@ -36,7 +36,7 @@ export default function Contact() {
             <span style={{ color: C.accent, opacity: .6 }}>▸</span> Contact
           </div>
           <h1 style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "clamp(36px,5vw,54px)", fontWeight: 400, lineHeight: 1.05, letterSpacing: "-.02em", marginBottom: "1.5rem" }}>
-            Let's build<br />
+            Let&apos;s build<br />
             <span style={{ fontStyle: "italic", color: "rgba(255,255,255,0.3)" }}>something</span><br />
             together
           </h1>
