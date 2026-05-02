@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://shubham-sahoo.github.io",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "postbuild": "touch out/.nojekyll",
     "start": "next start",
@@ -16,13 +16,17 @@
   "dependencies": {
     "@octokit/rest": "^21.1.1",
     "framer-motion": "^12.11.0",
+    "gray-matter": "^4.0.3",
     "next": "15.3.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
