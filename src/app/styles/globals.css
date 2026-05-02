@@ -1,26 +1,28 @@
-/* ===== Design System — Dark Theme ===== */
+/* ===== Design Tokens ===== */
 :root {
-  --bg: #0C0C0E;
-  --surface: #111113;
-  --surface2: #171719;
-  --border: rgba(255, 255, 255, 0.07);
-  --border2: rgba(255, 255, 255, 0.12);
-  --accent: #5DC8A5;
+  --bg:        #0C0C0E;
+  --surface:   #111113;
+  --surface2:  #171719;
+  --border:    rgba(255, 255, 255, 0.07);
+  --border2:   rgba(255, 255, 255, 0.12);
+  --accent:    #5DC8A5;
   --accent-dim: rgba(93, 200, 165, 0.15);
-  --text-primary: rgba(255, 255, 255, 0.93);
-  --text-muted: rgba(255, 255, 255, 0.5);
-  --text-dim: rgba(255, 255, 255, 0.25);
+  --tp:        rgba(255, 255, 255, 0.93);
+  --tm:        rgba(255, 255, 255, 0.5);
+  --td:        rgba(255, 255, 255, 0.25);
 
-  --font-sans: 'DM Sans', -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Mono', monospace;
+  --font-sans:  'DM Sans', -apple-system, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Mono', monospace;
   --font-serif: 'Instrument Serif', Georgia, serif;
 
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 10px;
 
-  --container: 1080px;
+  --container:  1080px;
   --nav-height: 52px;
+  --pad-x:      2.5rem;
+  --pad-x-sm:   1.25rem;
 }
 
 /* ===== Reset ===== */
@@ -28,7 +30,7 @@
 html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--bg);
-  color: var(--text-primary);
+  color: var(--tp);
   font-family: var(--font-sans);
   line-height: 1.6;
   min-height: 100vh;
@@ -38,19 +40,163 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+input, select { outline: none; }
 ::selection { background: rgba(93, 200, 165, 0.2); }
 
-/* ===== Layout ===== */
+/* ===== Container ===== */
 .container {
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0 var(--pad-x);
 }
-@media (max-width: 640px) { .container { padding: 0 1.25rem; } }
+@media (max-width: 768px) { .container { padding: 0 var(--pad-x-sm); } }
 
-/* ===== Typography ===== */
-h1, h2, h3, h4 { line-height: 1.1; font-weight: 400; }
+/* ===== Page wrapper with nav offset ===== */
+.page-top {
+  padding-top: calc(var(--nav-height) + 3rem);
+}
+@media (max-width: 768px) {
+  .page-top { padding-top: calc(var(--nav-height) + 2rem); }
+}
+
+/* ===== Hero grid ===== */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== Stats bar ===== */
+.stats-bar {
+  display: grid;
+  gap: 1px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+@media (max-width: 860px) {
+  .stats-bar { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ===== Featured works grid ===== */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+@media (max-width: 860px) { .works-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .works-grid { grid-template-columns: 1fr; } }
+
+/* ===== About strip ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+/* ===== About page header (bio + links) ===== */
+.about-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+@media (max-width: 768px) { .about-header-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+/* ===== Experience / publication rows ===== */
+.exp-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 3rem;
+  padding: 2.25rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.pub-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 3rem;
+  padding: 2.25rem 0;
+}
+@media (max-width: 768px) {
+  .exp-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+
+/* ===== Skills grid ===== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px)  { .skills-grid { grid-template-columns: 1fr; } }
+
+/* ===== Projects grid ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+@media (max-width: 768px) { .projects-grid { grid-template-columns: 1fr; } }
+
+/* ===== Metrics grid (publications) ===== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-width: 480px;
+}
+@media (max-width: 768px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===== Filter row ===== */
+.filter-row {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .filter-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+
+/* ===== Contact layout ===== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  min-height: 80vh;
+}
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; min-height: auto; }
+}
+
+/* ===== Section label ===== */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--td);
+  letter-spacing: .14em;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 /* ===== Accessibility ===== */
 .sr-only {
@@ -75,7 +221,7 @@ h1, h2, h3, h4 { line-height: 1.1; font-weight: 400; }
 }
 
 /* ===== Scrollbar ===== */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
